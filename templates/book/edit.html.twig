@@ -1,0 +1,23 @@
+{% extends "@Storyhelper/base.html.twig" %}
+
+{% block content %}
+
+	<div class="row">
+		<div class="col-12 col-md-4 offset-md-4">
+			{{ form_start(form) }}
+			<div class="card bg-secondary text-light">
+				<div class="card-body">
+					<h2 class="card-title">{{ title|raw }}</h2>
+					{{ form_widget(form) }}
+				</div>
+                <div class="card-footer text-center">
+                    <div class="btn-group">
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Record</button>
+                    </div>
+                </div>
+			</div>
+			{{ form_end(form) }}
+		</div>
+	</div>
+
+{% endblock %}

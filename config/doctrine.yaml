@@ -1,0 +1,9 @@
+doctrine:
+    orm:
+        mappings:
+            StoryhelperBundle:
+                is_bundle: true
+                type: annotation
+                dir: 'src/Entity'
+                prefix: 'ICS\StoryhelperBundle\Entity'
+                alias: Storyhelper

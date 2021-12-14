@@ -1,0 +1,57 @@
+{% extends "@Storyhelper/base.html.twig" %}
+
+
+{% block content %}
+
+
+	{% if books|length > 0 %}
+		{% for booklist in books|batch(6,'none') %}
+			<div class="row my-3">
+				{% for book in booklist %}
+					{% if book == 'none' %}
+						<div class="col"></div>
+					{% else %}
+					<div class="col">
+						<div class="card">
+							<div class="card-body">
+								<h3 class="card-title">
+									{{ book }}
+								</h3>
+								<div class="btn-group">
+									<button class="btn btn-primary">
+										<i class="fa fa-eye"></i>
+										Show</button>
+									<a href="{{ path('ics-storyhelper-book-edit',{book: book.id}) }}" class="btn btn-warning">
+										<i class="fa fa-edit"></i>
+										Edit</a>
+								</div>
+							</div>
+						</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+		{% endfor %}
+	{% else %}
+		<div class="row">
+			<div class="col-12 col-md-3 offset-md-4">
+				<div class="card bg-secondary text-light">
+					<div class="card-body">
+						<div class="display-3">
+							<i class="fa fa-ban"></i>
+							No Books</div>
+					</div>
+					<div class="card-footer">
+						<div class="btn-grou float-end">
+							<a href="{{ path('ics-storyhelper-book-add') }}" class="addBook btn btn-primary">
+								<i class="fa fa-plus"></i>
+								Add new book</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+
+
+{% endblock %}
