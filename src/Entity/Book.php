@@ -41,7 +41,7 @@ class Book
     /**
      * @ORM\OneToMany(targetEntity=Chapter::class,mappedBy="book")
      *
-     * @var Array|Chapter[]
+     * @var ArrayCollection
      */
     private $chapters;
 

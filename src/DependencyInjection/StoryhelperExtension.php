@@ -28,19 +28,25 @@ class StoryhelperExtension extends Extension implements PrependExtensionInterfac
 
         // Loading security config
         $loader->load('security.yaml');
+        $loader->load('twig.yaml');
 
         // Loading specific bundle config
-        //$bundles = $container->getParameter('kernel.bundles');
+        $bundles = $container->getParameter('kernel.bundles');
 
         // if(isset($bundles['LiipImagineBundle']))
         //{
         //    $loader->load('liip_imagine.yaml');
         //}
 
-        // if(isset($bundles['DoctrineBundle']))
-        // {
+        if(isset($bundles['NavigationBundle']))
+        {
+           $loader->load('navigation.yaml');
+        }
+
+        if(isset($bundles['DoctrineBundle']))
+        {
            $loader->load('doctrine.yaml');
-        //}
+        }
     }
 
 }

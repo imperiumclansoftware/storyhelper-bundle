@@ -6,7 +6,9 @@ use Symfony\Component\Translation\Translator;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use ICS\StoryhelperBundle\Form\Type\ChapterType;
 use ICS\StoryhelperBundle\Form\Type\BookType;
+use ICS\StoryhelperBundle\Entity\Chapter;
 use ICS\StoryhelperBundle\Entity\Book;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -52,8 +54,10 @@ class BookController extends AbstractController
             $doctrine->flush();
 
             $this->addFlash('success', sprintf($translator->trans('Book <b>%s</b> was recorded'),$book));
+            return $this->redirectToRoute('ics-storyhelper-book-homepage',['book' => $book->getId()]);
         }
 
+        
         return $this->render('@Storyhelper/book/edit.html.twig',[
             'form' => $form->createView(),
             'title' => $title

@@ -3,7 +3,7 @@
     "description": "A new bundle for symfony",
     "type": "symfony-bundle",
     "license": "MIT",
-    "version": "0.0.2",
+    "version": "0.0.1",
     "autoload": {
         "psr-4": {
             "ICS\\StoryhelperBundle\\": "/src"
@@ -16,6 +16,7 @@
         "symfony/routing": "^5",
         "symfony/form": "^5",
         "doctrine/orm": "^2.8",
-        "ics/ssi-bundle": "^0"
+        "ics/ssi-bundle": "^0",
+        "friendsofsymfony/ckeditor-bundle": "^2.3"
     }
 }

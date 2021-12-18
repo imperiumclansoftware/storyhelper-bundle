@@ -3,45 +3,138 @@
 
 {% block body %}
 
-<div class="container-fluid">
-<div class="row">
-{% if books|length > 0 %}
-    {% for book in books %}
-        <div class="card">
-            <div class="card-body">
-                <h3 class="card-title">{{ book.title }}</h3>
-            </div>
-        </div>
-    {% endfor %}
-{% else %}
-        <div class="col-12">
-            <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                <i class="fas fa-sitemap"></i> Structure
-            </a>
-        </div>
-{% endif %}
-</div>
-</div>
+	<div class="container-fluid">
+		<div class="row my-3">
+			<div class="col-12">
 
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Structure</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <div>
-      Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
-    </div>
-    <div class="dropdown mt-3">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
-        Dropdown button
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
+				<h2 class="">
+					<div class="btn-group float-end">
+						<a href="{{ path('ics-storyhelper-book-edit',{book: book.id}) }}" class="btn btn-warning">
+							<i class="fa fa-edit"></i>
+						</a>
+						<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+							<i class="fa fa-list"></i>
+						</button>
+						<a href="{{ path('ics-storyhelper-chapter-add',{book: book.id}) }}" class="btn btn-secondary">
+							<i class="fa fa-plus"></i>
+							Chapter
+						</a>
+						<a href="{{ path('ics-storyhelper-scene-add',{book: book.id, chapter: chapter.id}) }}" class="btn btn-secondary">
+							<i class="fa fa-plus"></i>
+							Scene
+						</a>
+					</div>
+					{{ book }}
+				</h2>
+
+				<h3 class="">
+						Chapter
+						{{ chapter.number }}
+						:
+						<small class="text-info">{{ chapter.title }}</small>
+					<button class="btn ms-3" data-bs-toggle="modal" data-bs-target="#chapterModal"><i class="fa fa-edit"></i></button>
+				</h3>
+			</div>
+			<div class="row my-3">
+				<div class="col-12">
+					{{ form_start(form) }}
+					<ul class="nav nav-tabs justify-content-center">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="#" data-bs-toggle="tab" data-bs-target="#resume">
+								<i class="fas fa-align-left"></i>
+								Resume</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#" data-bs-toggle="tab" data-bs-target="#text">
+								<i class="fas fa-feather"></i>
+								Text</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#" data-bs-toggle="tab" data-bs-target="#components">
+								<i class="fas fa-toolbox"></i>
+								Components</a>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane fade show active p-3" id="resume" role="tabpanel" aria-labelledby="home-tab">
+							{{ form_widget(form.resume)}}
+						</div>
+						<div class="tab-pane fade p-3" id="text" role="tabpanel" aria-labelledby="profile-tab">
+							{{ form_widget(form.text)}}
+						</div>
+						<div class="tab-pane fade p-3" id="components" role="tabpanel" aria-labelledby="messages-tab">
+							Components
+						</div>
+					</div>
+					<div class="p-3">
+						<div class="btn-group">
+							<button type="submit" class="btn btn-primary">
+								<i class="class fa fa-save"></i>
+								Enregistrer
+							</button>
+						</div>
+					</div>
+					{{ form_end(form) }}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="chapterModal" class="modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				{{ form_start(chapterForm) }}
+				<div class="modal-header">
+					<h5 class="modal-title">Modification du chapitre</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+
+					{{ form_widget(chapterForm) }}
+
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary">
+						<i class="fa fa-save"></i>
+						Enregistrer</button>
+				</div>
+				{{ form_end(chapterForm)}}
+			</div>
+		</div>
+	</div>
+
+
+	<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+		<div class="offcanvas-header">
+			<h5 class="offcanvas-title" id="offcanvasExampleLabel">
+				<i class="fa fa-book-open"></i>
+				{{ book }}
+				<small class="text-muted">Structure</small>
+			</h5>
+			<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		</div>
+		<div class="offcanvas-body">
+			<div id="treeview"></div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block stylesheets %}
+	<link href="{{ asset('bundles/storyhelper/libs/bs5-treeview/dist/css/bstreeview.min.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset('bundles/storyhelper/libs/bs5-treeview/dist/js/bstreeview.min.js') }}"></script>
+	<script>
+		$( function () {
+updateTreeview();
+} );
+
+function updateTreeview() {
+$.ajax( { url: '{{ path('ics-storyhelper-book-structure',{ book: book.id}) }}' } ).done( function ( data ) {
+$( '#treeview' ).bstreeview( { data: data } );
+} );
+}
+	</script>
 {% endblock %}

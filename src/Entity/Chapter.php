@@ -38,6 +38,17 @@ class Chapter
      * @var Book
      */
     private $book;
+    /**
+     * @ORM\OneToMany(targetEntity=Scene::class, mappedBy="chapter")
+     *
+     * @var ArrayCollection
+     */
+    private $scenes;
+
+    public function __construct()
+    {
+        $this->scenes = new ArrayCollection();
+    }
 
     /**
      * Get the value of id
@@ -131,6 +142,31 @@ class Chapter
     public function setBook(Book $book)
     {
         $this->book = $book;
+
+        return $this;
+    }
+
+    public function getLogMessage()
+    {
+        return 'Chapter '.$this->number.' : '.$this->title.' in book '.$this->getBook();
+    }
+
+    /**
+     * Get the value of scenes
+     */ 
+    public function getScenes()
+    {
+        return $this->scenes;
+    }
+
+    /**
+     * Set the value of scenes
+     *
+     * @return  self
+     */ 
+    public function setScenes($scenes)
+    {
+        $this->scenes = $scenes;
 
         return $this;
     }

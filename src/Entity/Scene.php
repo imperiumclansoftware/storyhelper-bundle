@@ -31,7 +31,7 @@ class Scene
      */
     private $resume;
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      *
      * @var string
      */
@@ -57,6 +57,13 @@ class Scene
      * @var ArrayCollection|Artefact[]
      */
     private $artefacts;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Chapter::class, inversedBy="scenes")
+     *
+     * @var Chapter
+     */
+    private $chapter;
 
     
     public function __construct()
@@ -206,5 +213,34 @@ class Scene
         $this->artefacts = $artefacts;
 
         return $this;
+    }
+
+    /**
+     * Get the value of chapter
+     *
+     * @return  Chapter
+     */ 
+    public function getChapter()
+    {
+        return $this->chapter;
+    }
+
+    /**
+     * Set the value of chapter
+     *
+     * @param  Chapter  $chapter
+     *
+     * @return  self
+     */ 
+    public function setChapter(Chapter $chapter)
+    {
+        $this->chapter = $chapter;
+
+        return $this;
+    }
+
+    public function getLogMessage()
+    {
+        return 'Scene '.$this->getChapter()->getNumber().' in book '.$this->getChapter()->getBook();
     }
 }

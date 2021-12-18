@@ -1,0 +1,8 @@
+navigation:
+  navbars:
+    main:
+      items:
+        storyhelper-homepage:
+          lib: storyhelper
+          icon: fas fa-book-open
+          route: ics-storyhelper-homepage
