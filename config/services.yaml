@@ -6,15 +6,15 @@ services:
     ICS\StoryhelperBundle\Controller\:
         resource: "../src/Controller"
         tags: ['controller.services_arguments']
-    ICS\StoryhelperBundle\Service\:
-        resource: "../src/Service"
-        tags: ['controller.services_arguments']
-    ICS\StoryhelperBundle\Command\:
-        resource: "../src/Command"
-        tags: ['controller.services_arguments']
-    ICS\StoryhelperBundle\Twig\:
-        resource: "../src/Twig"
-        tags: ['controller.services_arguments']
+    # ICS\StoryhelperBundle\Service\:
+    #     resource: "../src/Service"
+    #     tags: ['controller.services_arguments']
+    # ICS\StoryhelperBundle\Command\:
+    #     resource: "../src/Command"
+    #     tags: ['controller.services_arguments']
+    # ICS\StoryhelperBundle\Twig\:
+    #     resource: "../src/Twig"
+    #     tags: ['controller.services_arguments']
     ICS\StoryhelperBundle\Form\:
         resource: "../src/Form"
         tags: ['controller.services_arguments']
